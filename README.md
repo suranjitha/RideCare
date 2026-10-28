@@ -155,10 +155,4 @@ Place your screenshots in a folder named `screenshots` in the project directory.
 
 **Suranjitha S**
 
-BCA Student
 
-GitHub: [suranjitha](https://github.com/suranjitha)
-
-## License
-
-This project is currently available for educational and demonstration purposes. No formal open-source license has been specified.
