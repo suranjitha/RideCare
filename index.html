@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RideCare – Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark rc-navbar sticky-top">
+  <div class="container-fluid px-3">
+    <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="index.html">
+      <i class="bi bi-taxi-front-fill"></i> RideCare
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarMain">
+      <ul class="navbar-nav ms-auto gap-1">
+        <li class="nav-item"><a class="nav-link active" href="index.html"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="earnings.html"><i class="bi bi-cash-coin"></i> Daily Earnings</a></li>
+        <li class="nav-item"><a class="nav-link" href="report-lost.html"><i class="bi bi-search-heart"></i> Report Lost</a></li>
+        <li class="nav-item"><a class="nav-link" href="report-found.html"><i class="bi bi-bag-check-fill"></i> Report Found</a></li>
+        <li class="nav-item"><a class="nav-link" href="search.html"><i class="bi bi-binoculars-fill"></i> Search</a></li>
+        <li class="nav-item"><a class="nav-link" href="my-reports.html"><i class="bi bi-journal-text"></i> My Reports</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="rc-hero py-4">
+  <div class="container">
+    <div class="d-flex align-items-center gap-3">
+      <div class="rc-hero-icon"><i class="bi bi-taxi-front-fill"></i></div>
+      <div>
+        <h1 class="mb-0 fw-bold">Welcome to RideCare</h1>
+        <p class="mb-0 text-muted">Auto-rickshaw earnings tracker &amp; lost-and-found platform</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container py-4">
+
+  <!-- Backend Status Banner -->
+  <div class="alert alert-success d-flex align-items-start gap-2 mb-4" role="alert">
+    <i class="bi bi-server mt-1"></i>
+    <div>
+      <strong>Backend Connected:</strong> All data is saved to a <em>SQLite database</em> on this server. Reports are shared across all pages and persist between sessions.
+    </div>
+  </div>
+
+  <!-- Earnings Summary Cards -->
+  <h5 class="section-title mb-3"><i class="bi bi-cash-coin text-success me-2"></i>Today's Earnings</h5>
+  <div class="row g-3 mb-4">
+    <div class="col-6 col-md-3">
+      <div class="rc-card text-center h-100">
+        <div class="rc-card-icon bg-success-subtle text-success"><i class="bi bi-currency-rupee"></i></div>
+        <div class="rc-card-value" id="dash-today-earnings">₹0</div>
+        <div class="rc-card-label">Today's Earnings</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="rc-card text-center h-100">
+        <div class="rc-card-icon bg-warning-subtle text-warning"><i class="bi bi-bullseye"></i></div>
+        <div class="rc-card-value" id="dash-target">₹0</div>
+        <div class="rc-card-label">Daily Target</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="rc-card text-center h-100">
+        <div class="rc-card-icon bg-danger-subtle text-danger"><i class="bi bi-arrow-down-circle"></i></div>
+        <div class="rc-card-value" id="dash-remaining">₹0</div>
+        <div class="rc-card-label">Remaining</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="rc-card text-center h-100">
+        <div class="rc-card-icon bg-info-subtle text-info"><i class="bi bi-graph-up-arrow"></i></div>
+        <div class="rc-card-value" id="dash-weekly">₹0</div>
+        <div class="rc-card-label">This Week</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Today's target progress -->
+  <div class="rc-card mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <span class="fw-semibold">Daily Target Progress</span>
+      <span id="dash-progress-pct" class="badge bg-success">0%</span>
+    </div>
+    <div class="progress" style="height:18px; border-radius:10px;">
+      <div id="dash-progress-bar" class="progress-bar bg-success progress-bar-striped" role="progressbar" style="width:0%"></div>
+    </div>
+    <div class="mt-2 text-end">
+      <a href="earnings.html" class="btn btn-sm btn-outline-success">Update Earnings <i class="bi bi-arrow-right"></i></a>
+    </div>
+  </div>
+
+  <!-- Lost & Found Summary -->
+  <h5 class="section-title mb-3"><i class="bi bi-bag-x-fill text-warning me-2"></i>Lost &amp; Found Summary</h5>
+  <div class="row g-3 mb-4">
+    <div class="col-6 col-md-3">
+      <div class="rc-card text-center h-100">
+        <div class="rc-card-icon bg-danger-subtle text-danger"><i class="bi bi-question-circle"></i></div>
+        <div class="rc-card-value" id="dash-missing">0</div>
+        <div class="rc-card-label">Missing Reports</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="rc-card text-center h-100">
+        <div class="rc-card-icon bg-success-subtle text-success"><i class="bi bi-check2-circle"></i></div>
+        <div class="rc-card-value" id="dash-found-count">0</div>
+        <div class="rc-card-label">Found Reports</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="rc-card text-center h-100">
+        <div class="rc-card-icon bg-info-subtle text-info"><i class="bi bi-box-seam"></i></div>
+        <div class="rc-card-value" id="dash-returned">0</div>
+        <div class="rc-card-label">Returned</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="rc-card text-center h-100">
+        <div class="rc-card-icon bg-secondary-subtle text-secondary"><i class="bi bi-collection"></i></div>
+        <div class="rc-card-value" id="dash-total-reports">0</div>
+        <div class="rc-card-label">Total Reports</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Reports -->
+  <div class="rc-card mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h6 class="mb-0 fw-semibold"><i class="bi bi-clock-history me-1"></i>Recent Reports</h6>
+      <a href="search.html" class="btn btn-sm btn-outline-warning">View All</a>
+    </div>
+    <div id="dash-recent-reports">
+      <p class="text-muted text-center py-3">No reports yet. <a href="report-lost.html">Report a lost item</a> or <a href="report-found.html">report a found item</a>.</p>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <h5 class="section-title mb-3"><i class="bi bi-lightning-fill text-warning me-2"></i>Quick Actions</h5>
+  <div class="row g-3">
+    <div class="col-6 col-md-3">
+      <a href="earnings.html" class="rc-action-btn btn w-100 h-100 d-flex flex-column align-items-center justify-content-center gap-2 py-3">
+        <i class="bi bi-plus-circle-fill fs-2"></i>
+        <span>Add Earnings</span>
+      </a>
+    </div>
+    <div class="col-6 col-md-3">
+      <a href="report-lost.html" class="rc-action-btn btn w-100 h-100 d-flex flex-column align-items-center justify-content-center gap-2 py-3 btn-warning-outline">
+        <i class="bi bi-search-heart fs-2"></i>
+        <span>Report Lost</span>
+      </a>
+    </div>
+    <div class="col-6 col-md-3">
+      <a href="report-found.html" class="rc-action-btn btn w-100 h-100 d-flex flex-column align-items-center justify-content-center gap-2 py-3">
+        <i class="bi bi-bag-check-fill fs-2"></i>
+        <span>Report Found</span>
+      </a>
+    </div>
+    <div class="col-6 col-md-3">
+      <a href="search.html" class="rc-action-btn btn w-100 h-100 d-flex flex-column align-items-center justify-content-center gap-2 py-3 btn-warning-outline">
+        <i class="bi bi-binoculars-fill fs-2"></i>
+        <span>Search Items</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<footer class="rc-footer mt-5 py-3 text-center">
+  <p class="mb-0 text-muted small">&copy; 2026 RideCare &mdash; Auto-rickshaw Earnings &amp; Lost-Found Platform &mdash;
+    <em>Data stored in SQLite database on server.</em>
+  </p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

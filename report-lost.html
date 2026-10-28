@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RideCare – Report Lost Item</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark rc-navbar sticky-top">
+  <div class="container-fluid px-3">
+    <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="index.html">
+      <i class="bi bi-taxi-front-fill"></i> RideCare
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarMain">
+      <ul class="navbar-nav ms-auto gap-1">
+        <li class="nav-item"><a class="nav-link" href="index.html"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="earnings.html"><i class="bi bi-cash-coin"></i> Daily Earnings</a></li>
+        <li class="nav-item"><a class="nav-link active" href="report-lost.html"><i class="bi bi-search-heart"></i> Report Lost</a></li>
+        <li class="nav-item"><a class="nav-link" href="report-found.html"><i class="bi bi-bag-check-fill"></i> Report Found</a></li>
+        <li class="nav-item"><a class="nav-link" href="search.html"><i class="bi bi-binoculars-fill"></i> Search</a></li>
+        <li class="nav-item"><a class="nav-link" href="my-reports.html"><i class="bi bi-journal-text"></i> My Reports</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="rc-hero rc-hero-warning py-4">
+  <div class="container">
+    <div class="d-flex align-items-center gap-3">
+      <div class="rc-hero-icon"><i class="bi bi-search-heart"></i></div>
+      <div>
+        <h1 class="mb-0 fw-bold">Report Lost Item</h1>
+        <p class="mb-0 text-muted">Left something behind in an auto-rickshaw? Report it here.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+
+      <div class="rc-card">
+        <form id="lost-form" novalidate>
+          <!-- Item Name -->
+          <div class="mb-3">
+            <label for="lost-name" class="form-label fw-semibold">Item Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="lost-name" placeholder="e.g. Blue Backpack" maxlength="100" required />
+            <div class="invalid-feedback" id="err-lost-name">Please enter the item name.</div>
+          </div>
+
+          <!-- Category -->
+          <div class="mb-3">
+            <label for="lost-category" class="form-label fw-semibold">Category <span class="text-danger">*</span></label>
+            <select class="form-select" id="lost-category" required>
+              <option value="">-- Select Category --</option>
+              <option>Electronics</option>
+              <option>Bags & Luggage</option>
+              <option>Clothing</option>
+              <option>Documents & IDs</option>
+              <option>Jewellery</option>
+              <option>Keys</option>
+              <option>Wallet & Purse</option>
+              <option>Mobile Phone</option>
+              <option>Books & Stationery</option>
+              <option>Medicines</option>
+              <option>Other</option>
+            </select>
+            <div class="invalid-feedback" id="err-lost-category">Please select a category.</div>
+          </div>
+
+          <!-- Date -->
+          <div class="mb-3">
+            <label for="lost-date" class="form-label fw-semibold">Date Lost <span class="text-danger">*</span></label>
+            <input type="date" class="form-control" id="lost-date" required />
+            <div class="invalid-feedback" id="err-lost-date">Please enter the date you lost the item.</div>
+          </div>
+
+          <!-- Location -->
+          <div class="mb-3">
+            <label for="lost-location" class="form-label fw-semibold">Location / Area <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="lost-location" placeholder="e.g. MG Road, near the bus stand" maxlength="150" required />
+            <div class="invalid-feedback" id="err-lost-location">Please enter the approximate location.</div>
+          </div>
+
+          <!-- Description -->
+          <div class="mb-3">
+            <label for="lost-desc" class="form-label fw-semibold">Description <span class="text-danger">*</span></label>
+            <textarea class="form-control" id="lost-desc" rows="3" placeholder="Describe the item – colour, brand, markings, contents, etc." maxlength="500" required></textarea>
+            <div class="form-text">Max 500 characters. <span id="lost-desc-count">0</span>/500</div>
+            <div class="invalid-feedback" id="err-lost-desc">Please describe the item.</div>
+          </div>
+
+          <!-- Contact Info (optional) -->
+          <div class="rc-card bg-light border mb-3">
+            <h6 class="fw-semibold mb-2"><i class="bi bi-person-lines-fill text-success me-1"></i>Contact Details <span class="text-muted fw-normal">(Optional)</span></h6>
+            <p class="small text-muted mb-3">Your contact details will be visible in search results so finders can reach you.</p>
+            <div class="mb-2">
+              <label for="lost-contact-name" class="form-label small">Your Name</label>
+              <input type="text" class="form-control form-control-sm" id="lost-contact-name" placeholder="Your name" maxlength="80" />
+            </div>
+            <div class="mb-2">
+              <label for="lost-contact-phone" class="form-label small">Phone Number</label>
+              <input type="tel" class="form-control form-control-sm" id="lost-contact-phone" placeholder="10-digit mobile number" maxlength="15" />
+              <div class="invalid-feedback" id="err-lost-phone">Enter a valid 10-digit phone number.</div>
+            </div>
+            <div class="mb-0">
+              <label for="lost-contact-email" class="form-label small">Email Address</label>
+              <input type="email" class="form-control form-control-sm" id="lost-contact-email" placeholder="yourname@email.com" maxlength="100" />
+              <div class="invalid-feedback" id="err-lost-email">Enter a valid email address.</div>
+            </div>
+          </div>
+
+          <div id="lost-success" class="alert alert-success d-none" role="alert"></div>
+          <div id="lost-error" class="alert alert-danger d-none" role="alert"></div>
+
+          <button type="submit" class="btn btn-warning w-100 fw-bold py-2">
+            <i class="bi bi-send-fill me-2"></i>Submit Lost Item Report
+          </button>
+        </form>
+      </div>
+
+      <div class="text-center mt-3">
+        <a href="my-reports.html" class="btn btn-outline-success btn-sm">
+          <i class="bi bi-journal-text me-1"></i>View My Reports
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="rc-footer mt-5 py-3 text-center">
+  <p class="mb-0 text-muted small">&copy; 2026 RideCare &mdash; Data stored locally on this device only.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/report-lost.js"></script>
+</body>
+</html>

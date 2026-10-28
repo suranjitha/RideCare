@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ridecare</string>
+    <string name="title_activity_main">ridecare</string>
+    <string name="package_name">com.ridecare.com</string>
+    <string name="custom_url_scheme">com.ridecare.com</string>
+</resources>
